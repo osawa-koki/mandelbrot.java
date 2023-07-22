@@ -1,0 +1,16 @@
+name: Exec
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-run:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: docker build -t mandelbrot-java .
+      - name: Exec java program
+        run: docker run --rm --name mandelbrot-java mandelbrot-java
