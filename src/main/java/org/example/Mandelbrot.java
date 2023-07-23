@@ -98,10 +98,6 @@ public class Mandelbrot {
     }
   }
 
-  public String getSavedPath() {
-    return Paths.get(base_path, output).toString();
-  }
-
   private int Rgb2Int(int r, int g, int b) {
     r = r % 255;
     g = g % 255;

@@ -28,7 +28,7 @@ public class Main {
         mandelbrots[i].debugOutput();
         mandelbrots[i].draw();
         mandelbrots[i].save();
-        paths[i] = mandelbrots[i].getSavedPath();
+        paths[i] = mandelbrots[i].output;
       }
 
       String pathsString = String.join(",", paths);
