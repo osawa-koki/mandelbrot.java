@@ -1,10 +1,17 @@
 package org.example;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
 import javax.imageio.ImageIO;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
+import java.nio.file.Paths;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
@@ -12,20 +19,48 @@ public class Main {
   public static void main(String[] args) {
     // Press Opt+Enter with your caret at the highlighted text to see how
     // IntelliJ IDEA suggests fixing it.
-    System.out.printf("Hello and welcome!");
+    System.out.println("Hello and welcome!");
 
-    // 100x100の青色の画像を作成する。
-    int width = 100;
-    int height = 100;
-    int color = 0x0000ff;
-    Image image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-    Graphics graphics = image.getGraphics();
-    graphics.setColor(new Color(color));
-    graphics.fillRect(0, 0, width, height);
     try {
-      ImageIO.write((RenderedImage) image, "png", new File("./public/blue.png"));
+      DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+      DocumentBuilder builder = factory.newDocumentBuilder();
+      Document document = builder.parse(Paths.get("./config.xml").toFile());
+      Element config = document.getDocumentElement();
+      int width = Integer.parseInt(config.getElementsByTagName("width").item(0).getTextContent());
+      int height = Integer.parseInt(config.getElementsByTagName("height").item(0).getTextContent());
+      double x_min = Double.parseDouble(config.getElementsByTagName("x_min").item(0).getTextContent());
+      double x_max = Double.parseDouble(config.getElementsByTagName("x_max").item(0).getTextContent());
+      double y_min = Double.parseDouble(config.getElementsByTagName("y_min").item(0).getTextContent());
+      double y_max = Double.parseDouble(config.getElementsByTagName("y_max").item(0).getTextContent());
+      int iteration = Integer.parseInt(config.getElementsByTagName("iteration").item(0).getTextContent());
+      int threshold = Integer.parseInt(config.getElementsByTagName("threshold").item(0).getTextContent());
+      String output = config.getElementsByTagName("output").item(0).getTextContent();
+
+      System.out.println("width: " + width);
+      System.out.println("height: " + height);
+      System.out.println("x_min: " + x_min);
+      System.out.println("x_max: " + x_max);
+      System.out.println("y_min: " + y_min);
+      System.out.println("y_max: " + y_max);
+      System.out.println("iterations: " + iteration);
+      System.out.println("threshold: " + threshold);
+      System.out.println("output: " + output);
     } catch (Exception e) {
       e.printStackTrace();
     }
+
+//    // 100x100の青色の画像を作成する。
+//    int width = 100;
+//    int height = 100;
+//    int color = 0x0000ff;
+//    Image image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+//    Graphics graphics = image.getGraphics();
+//    graphics.setColor(new Color(color));
+//    graphics.fillRect(0, 0, width, height);
+//    try {
+//      ImageIO.write((RenderedImage) image, "png", new File("./public/blue.png"));
+//    } catch (Exception e) {
+//      e.printStackTrace();
+//    }
   }
 }
