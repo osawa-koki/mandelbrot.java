@@ -9,7 +9,7 @@ enum ColorMode {
   RED,
   GREEN,
   BLUE,
-  BLACK
+  WHITE
 }
 
 public class Mandelbrot {
@@ -82,7 +82,7 @@ public class Mandelbrot {
             case RED -> _color = Rgb2Int(255, 255 - i * incremental_step, 255 - i * incremental_step);
             case GREEN -> _color = Rgb2Int(255 - i * incremental_step, 255, 255 - i * incremental_step);
             case BLUE -> _color = Rgb2Int(255 - i * incremental_step, 255 - i * incremental_step, 255);
-            default -> _color = Rgb2Int(0, 0, 0);
+            default -> _color = Rgb2Int(255, 255, 255);
           }
         }
         graphics.setColor(new Color(_color));
