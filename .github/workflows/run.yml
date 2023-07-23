@@ -24,7 +24,7 @@ jobs:
       - name: Build the Docker image
         run: docker build -t mandelbrot-java .
       - name: Exec java program
-        run: docker run -v "$(pwd)"/public:/public --rm --name mandelbrot-java mandelbrot-java
+        run: docker run -v "$(pwd)"/public:/src/public --rm --name mandelbrot-java mandelbrot-java
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
