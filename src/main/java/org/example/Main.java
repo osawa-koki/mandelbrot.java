@@ -33,34 +33,18 @@ public class Main {
       double y_min = Double.parseDouble(config.getElementsByTagName("y_min").item(0).getTextContent());
       double y_max = Double.parseDouble(config.getElementsByTagName("y_max").item(0).getTextContent());
       int iteration = Integer.parseInt(config.getElementsByTagName("iteration").item(0).getTextContent());
+      int incremental_step = Integer.parseInt(config.getElementsByTagName("incremental_step").item(0).getTextContent());
       int threshold = Integer.parseInt(config.getElementsByTagName("threshold").item(0).getTextContent());
       String output = config.getElementsByTagName("output").item(0).getTextContent();
 
-      System.out.println("width: " + width);
-      System.out.println("height: " + height);
-      System.out.println("x_min: " + x_min);
-      System.out.println("x_max: " + x_max);
-      System.out.println("y_min: " + y_min);
-      System.out.println("y_max: " + y_max);
-      System.out.println("iterations: " + iteration);
-      System.out.println("threshold: " + threshold);
-      System.out.println("output: " + output);
+      Mandelbrot.setBasePath("./public");
+
+      Mandelbrot mandelbrot = new Mandelbrot(width, height, x_min, x_max, y_min, y_max, iteration, incremental_step, threshold, output);
+      mandelbrot.debugOutput();
+      mandelbrot.draw();
+      mandelbrot.save();
     } catch (Exception e) {
       e.printStackTrace();
     }
-
-//    // 100x100の青色の画像を作成する。
-//    int width = 100;
-//    int height = 100;
-//    int color = 0x0000ff;
-//    Image image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-//    Graphics graphics = image.getGraphics();
-//    graphics.setColor(new Color(color));
-//    graphics.fillRect(0, 0, width, height);
-//    try {
-//      ImageIO.write((RenderedImage) image, "png", new File("./public/blue.png"));
-//    } catch (Exception e) {
-//      e.printStackTrace();
-//    }
   }
 }

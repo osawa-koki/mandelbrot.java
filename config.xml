@@ -2,14 +2,30 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="config.xsd">
 
-  <width>1024</width>
-  <height>1024</height>
-  <x_min>-2.2</x_min>
-  <x_max>1.8</x_max>
-  <y_min>-2.0</y_min>
-  <y_max>2.0</y_max>
-  <iteration>100</iteration>
-  <threshold>10</threshold>
-  <output>mandelbrot.png</output>
+  <mandelbrot>
+    <width>1024</width>
+    <height>1024</height>
+    <x_min>-2.5</x_min>
+    <x_max>1.5</x_max>
+    <y_min>-2.0</y_min>
+    <y_max>2.0</y_max>
+    <iteration>100</iteration>
+    <incremental_step>100</incremental_step>
+    <threshold>10</threshold>
+    <output>mandelbrot1.png</output>
+  </mandelbrot>
+
+  <mandelbrot>
+    <width>1024</width>
+    <height>1024</height>
+    <x_min>-2.5</x_min>
+    <x_max>1.5</x_max>
+    <y_min>-2.0</y_min>
+    <y_max>2.0</y_max>
+    <iteration>100</iteration>
+    <incremental_step>100</incremental_step>
+    <threshold>10</threshold>
+    <output>mandelbrot2.png</output>
+  </mandelbrot>
 
 </config>
