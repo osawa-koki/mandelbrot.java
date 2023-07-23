@@ -1,5 +1,11 @@
 package org.example;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.File;
+
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
@@ -8,12 +14,18 @@ public class Main {
     // IntelliJ IDEA suggests fixing it.
     System.out.printf("Hello and welcome!");
 
-    // Press Ctrl+R or click the green arrow button in the gutter to run the code.
-    for (int i = 1; i <= 5; i++) {
-
-      // Press Ctrl+D to start debugging your code. We have set one breakpoint
-      // for you, but you can always add more by pressing Cmd+F8.
-      System.out.println("i = " + i);
+    // 100x100の青色の画像を作成する。
+    int width = 100;
+    int height = 100;
+    int color = 0x0000ff;
+    Image image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+    Graphics graphics = image.getGraphics();
+    graphics.setColor(new Color(color));
+    graphics.fillRect(0, 0, width, height);
+    try {
+      ImageIO.write((RenderedImage) image, "png", new File("blue.png"));
+    } catch (Exception e) {
+      e.printStackTrace();
     }
   }
 }
