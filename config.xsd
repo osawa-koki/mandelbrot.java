@@ -20,6 +20,7 @@
                   <xsd:enumeration value="RED" />
                   <xsd:enumeration value="GREEN" />
                   <xsd:enumeration value="BLUE" />
+                  <xsd:enumeration value="BLACK" />
                 </xsd:restriction>
               </xsd:simpleType>
             </xsd:element>

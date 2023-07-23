@@ -8,7 +8,8 @@ import java.nio.file.Paths;
 enum ColorMode {
   RED,
   GREEN,
-  BLUE
+  BLUE,
+  BLACK
 }
 
 public class Mandelbrot {
@@ -41,7 +42,7 @@ public class Mandelbrot {
     this.incremental_step = incremental_step;
     this.color_mode = color_mode;
     this.threshold = threshold;
-    this.output = output;
+    this.output = output.replace("#{GUID}", java.util.UUID.randomUUID().toString());
     this.image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
   }
 
