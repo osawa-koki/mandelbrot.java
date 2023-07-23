@@ -14,6 +14,15 @@
             <xsd:element name="y_max" type="xsd:float"/>
             <xsd:element name="iteration" type="xsd:integer"/>
             <xsd:element name="incremental_step" type="xsd:integer"/>
+            <xsd:element name="color_mode">
+              <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                  <xsd:enumeration value="RED" />
+                  <xsd:enumeration value="GREEN" />
+                  <xsd:enumeration value="BLUE" />
+                </xsd:restriction>
+              </xsd:simpleType>
+            </xsd:element>
             <xsd:element name="threshold" type="xsd:integer"/>
             <xsd:element name="output" type="xsd:string"/>
           </xsd:sequence>

@@ -5,6 +5,12 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.nio.file.Paths;
 
+enum ColorMode {
+  RED,
+  GREEN,
+  BLUE
+}
+
 public class Mandelbrot {
   static String base_path = "";
   int width;
@@ -15,6 +21,7 @@ public class Mandelbrot {
   double y_max;
   int iteration;
   int incremental_step;
+  ColorMode color_mode;
   int threshold;
   String output;
   Image image;
@@ -23,7 +30,7 @@ public class Mandelbrot {
     Mandelbrot.base_path = base_path;
   }
 
-  public Mandelbrot(int width, int height, double x_min, double x_max, double y_min, double y_max, int iteration, int incremental_step, int threshold, String output) {
+  public Mandelbrot(int width, int height, double x_min, double x_max, double y_min, double y_max, int iteration, int incremental_step, ColorMode color_mode, int threshold, String output) {
     this.width = width;
     this.height = height;
     this.x_min = x_min;
@@ -31,7 +38,8 @@ public class Mandelbrot {
     this.y_min = y_min;
     this.y_max = y_max;
     this.iteration = iteration;
-    this.incremental_step = 255 / iteration;
+    this.incremental_step = incremental_step;
+    this.color_mode = color_mode;
     this.threshold = threshold;
     this.output = output;
     this.image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -44,7 +52,9 @@ public class Mandelbrot {
     System.out.println("x_max: " + x_max);
     System.out.println("y_min: " + y_min);
     System.out.println("y_max: " + y_max);
-    System.out.println("iterations: " + iteration);
+    System.out.println("iteration: " + iteration);
+    System.out.println("incremental_step: " + incremental_step);
+    System.out.println("color_mode: " + color_mode);
     System.out.println("threshold: " + threshold);
     System.out.println("base_path: " + base_path);
     System.out.println("output: " + output);
@@ -59,17 +69,22 @@ public class Mandelbrot {
         double zy = y_min + (y_max - y_min) * y / height;
         Complex z = new Complex(0, 0);
         int i = 0;
-        int color;
+        int _color;
         while (z.abs() < threshold && i < iteration) {
           z = z.mul(z).add(new Complex(zx, zy));
           i++;
         }
         if (i == iteration) {
-          color = Rgb2Int(0, 0, 0);
+          _color = Rgb2Int(0, 0, 0);
         } else {
-          color = Rgb2Int(255 - iteration * incremental_step, iteration * incremental_step, iteration * incremental_step);
+          switch (color_mode) {
+            case RED -> _color = Rgb2Int(255, 255 - i * incremental_step, 255 - i * incremental_step);
+            case GREEN -> _color = Rgb2Int(255 - i * incremental_step, 255, 255 - i * incremental_step);
+            case BLUE -> _color = Rgb2Int(255 - i * incremental_step, 255 - i * incremental_step, 255);
+            default -> _color = Rgb2Int(0, 0, 0);
+          }
         }
-        graphics.setColor(new Color(color));
+        graphics.setColor(new Color(_color));
         graphics.fillRect(x, y, 1, 1);
       }
     }
@@ -81,6 +96,10 @@ public class Mandelbrot {
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  public String getSavedPath() {
+    return Paths.get(base_path, output).toString();
   }
 
   private int Rgb2Int(int r, int g, int b) {
