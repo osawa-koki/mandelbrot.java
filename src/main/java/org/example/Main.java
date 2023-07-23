@@ -23,7 +23,7 @@ public class Main {
     graphics.setColor(new Color(color));
     graphics.fillRect(0, 0, width, height);
     try {
-      ImageIO.write((RenderedImage) image, "png", new File("blue.png"));
+      ImageIO.write((RenderedImage) image, "png", new File("./public/blue.png"));
     } catch (Exception e) {
       e.printStackTrace();
     }
